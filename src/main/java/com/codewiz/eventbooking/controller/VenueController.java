@@ -21,12 +21,14 @@ public class VenueController {
 
     private final VenueRepository venueRepository;
     private final EventRepository eventRepository;
-    private final WeatherService weatherService;
+    //private final WeatherService weatherService;
 
-    public VenueController(VenueRepository venueRepository, EventRepository eventRepository, WeatherService weatherService) {
+    public VenueController(VenueRepository venueRepository,
+                           EventRepository eventRepository){
+                           //WeatherService weatherService) {
         this.venueRepository = venueRepository;
         this.eventRepository = eventRepository;
-        this.weatherService = weatherService;
+        //this.weatherService = weatherService;
     }
 
     @QueryMapping
@@ -44,10 +46,10 @@ public class VenueController {
         return eventRepository.findByVenueId(venue.id());
     }
 
-    @SchemaMapping
+    /**@SchemaMapping
     public Weather weather(Venue venue) {
         return weatherService.getWeatherForLocation(venue.location());
-    }
+    }*/
 
     @MutationMapping
     public Venue createVenue(@Argument VenueInput venueInput) {

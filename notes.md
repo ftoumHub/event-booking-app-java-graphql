@@ -1,3 +1,5 @@
+https://codewiz.info/blog/graphql-basics-java-spring/
+
 # Pour lancer proprement depuis la racine du projet:
 
 ```shell

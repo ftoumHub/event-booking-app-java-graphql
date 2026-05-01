@@ -28,7 +28,6 @@ type Venue {
     location: String!
     capacity: Int!
     events: [Event!]!
-    weather: Weather!
 }
 
 type Event {
@@ -67,14 +66,6 @@ type Ticket {
     booking: Booking!
 }
 
-type Weather {
-    temp: Float!
-    feels_like: Float!
-    temp_min: Float!
-    temp_max: Float!
-    humidity: Float!
-    description: String!
-}
 
 input UserInput {
     name: String!
