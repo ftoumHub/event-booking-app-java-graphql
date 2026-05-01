@@ -1,0 +1,9 @@
+query {
+  venues {
+    id
+    name
+    address
+    location
+    capacity
+  }
+}

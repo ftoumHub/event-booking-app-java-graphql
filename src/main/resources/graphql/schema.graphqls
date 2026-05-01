@@ -1,0 +1,106 @@
+type Query {
+    events: [Event!]!
+    event(id: ID!): Event
+    venues: [Venue!]!
+    venue(id: ID!): Venue
+    bookings(eventId: Float!): [Booking!]!
+}
+
+type Mutation {
+    createUser(userInput: UserInput!): User!
+    createVenue(venueInput: VenueInput!): Venue!
+    createEvent(eventInput: EventInput!): Event!
+    createBooking(bookingInput: BookingInput!): Booking!
+}
+
+type User {
+    id: ID!
+    name: String!
+    email: String!
+    password: String!
+    role: String!
+}
+
+type Venue {
+    id: ID!
+    name: String!
+    address: String!
+    location: String!
+    capacity: Int!
+    events: [Event!]!
+    weather: Weather!
+}
+
+type Event {
+    id: ID!
+    name: String!
+    description: String!
+    eventDate: String!
+    category: String!
+    imageUrl: String
+    venueId: Int!
+    venue: Venue!
+    artists: [Artist!]!
+}
+
+type Artist {
+    id: ID!
+    name: String!
+    bio: String!
+    imageUrl: String
+    events: [Event!]!
+}
+
+type Booking {
+    id: ID!
+    bookingDate: String!
+    eventId: Int!
+    userId: Int!
+    price: Float!
+    tickets: [Ticket!]!
+}
+
+type Ticket {
+    id: ID!
+    seatNo: Int!
+    bookingId: Int!
+    booking: Booking!
+}
+
+type Weather {
+    temp: Float!
+    feels_like: Float!
+    temp_min: Float!
+    temp_max: Float!
+    humidity: Float!
+    description: String!
+}
+
+input UserInput {
+    name: String!
+    email: String!
+    password: String!
+    role: String
+}
+
+input VenueInput {
+    name: String!
+    address: String!
+    location: String!
+    capacity: Float!
+}
+
+input EventInput {
+    name: String!
+    description: String!
+    eventDate: String!
+    category: String!
+    imageUrl: String
+    venueId: Int!
+    artistIds: [Int!]!
+}
+
+input BookingInput {
+    eventId: Int!
+    seats: [Int!]!
+}

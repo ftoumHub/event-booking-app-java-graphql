@@ -1,0 +1,10 @@
+query Event($id: ID!) {
+  event(id: $id) {
+    id
+    name
+    description
+    eventDate
+    category
+    venueId
+  }
+}
