@@ -1,5 +1,6 @@
 package com.codewiz.eventbooking.repository;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.data.jdbc.repository.query.Modifying;
@@ -22,4 +23,6 @@ public interface EventArtistRepository extends CrudRepository<EventArtist, Long>
     @Modifying
     @Query("DELETE FROM event_artists WHERE event_id = :eventId")
     void deleteByEventId(@Param("eventId") Long eventId);
+
+    List<EventArtist> findByEventIdIn(Collection<Long> eventIds);
 }

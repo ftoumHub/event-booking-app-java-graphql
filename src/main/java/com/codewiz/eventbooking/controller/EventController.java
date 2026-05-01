@@ -2,7 +2,9 @@ package com.codewiz.eventbooking.controller;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
+import org.dataloader.DataLoader;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
@@ -37,6 +39,7 @@ public class EventController {
 
     @QueryMapping
     public List<Event> events() {
+        System.out.println(">>> EVENTS QUERY CALLED");
         return (List<Event>) eventRepository.findAll();
     }
 
@@ -45,7 +48,7 @@ public class EventController {
         return eventRepository.findById(Long.valueOf(id)).orElse(null);
     }
 
-    @SchemaMapping
+    /**@SchemaMapping
     public Venue venue(Event event) {
         return venueRepository.findById(event.venueId()).orElse(null);
     }
@@ -53,6 +56,17 @@ public class EventController {
     @SchemaMapping
     public List<Artist> artists(Event event) {
         return artistRepository.findByEventId(event.id());
+    }*/
+
+    @SchemaMapping
+    public CompletableFuture<Venue> venue(Event event, DataLoader<Long, Venue> venueLoader) {
+        return venueLoader.load(event.venueId());
+    }
+
+    @SchemaMapping
+    public CompletableFuture<List<Artist>> artists(Event event,
+                                                   DataLoader<Long, List<Artist>> artistLoader) {
+        return artistLoader.load(event.id());
     }
 
     @MutationMapping
